@@ -6,6 +6,17 @@
 tell script "My Error Codes"
 end tell
 
+(*
+	Demo to interactively change resolution
+*)
+repeat while true
+	try
+		set action to display dialog "Select a resolution change" buttons {"Cancel", "Decrease", "Increase"} default button "Increase"
+	on error -128
+		return
+	end try
+end repeat
+
 to showDisplaysTab()
 	tell application "System Preferences"
 		launch
@@ -18,9 +29,9 @@ end showDisplaysTab
 
 (*
 	Helper function to get the buttons from System Preferences that control the reolution.
-	This assumes that the display of interest is labeled "Built-in Retina Display".  Other 
+	This assumes that the display of interest is labeled "Built-in Retina Display".  Other
 	display configurations may require tweaks.
-	
+
 	Returns: a Radio Group of 5 buttons, where button 1 is the lowest resolution (biggest
 	pixels) and button 5 is the densest resolution (smallest pixels).  This Radio Group
 	requires UI Scripting ("System Events") to access it.
@@ -45,7 +56,7 @@ end getRetinaResolutionRadioGroup
 
 (*
 	Get the current value of the display resolution.
-	
+
 	Returns: a number from 1 to 5 where 1 is the lowest resolution (biggest
 	pixels) and 5 is the densest resolution (smallest pixels).
 *)
