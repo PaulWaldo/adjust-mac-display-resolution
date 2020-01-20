@@ -5,8 +5,9 @@ OSA_LIBRARY_PATH=$(pwd):$OSA_LIBRARY_PATH
 echo $OSA_LIBRARY_PATH
 
 # Compile plain-text AppleScript files to .scpt files in the current folder
-./my_osacompile -o "My Error Codes.scpt" "My Error Codes.applescript"
+#./my_osacompile -o "My Error Codes.scpt" "My Error Codes.applescript"
 ./my_osacompile -o "My Display Utilities.scpt" "My Display Utilities.applescript"
+./my_osacompile -o "Change Resolution.scpt" "Change Resolution.applescript"
 
 # Run the main script
-./my_osascript "My Display Utilities.scpt"
+./my_osascript "Change Resolution.scpt"
