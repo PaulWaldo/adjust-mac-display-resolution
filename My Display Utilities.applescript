@@ -3,19 +3,17 @@
 *)
 
 (* Load error constants *)
-tell script "My Error Codes"
-end tell
+global ERR_AT_MIN_RESOLUTION
+set ERR_AT_MIN_RESOLUTION to 500
 
-(*
-	Demo to interactively change resolution
-*)
-repeat while true
-	try
-		set action to display dialog "Select a resolution change" buttons {"Cancel", "Decrease", "Increase"} default button "Increase"
-	on error -128
-		return
-	end try
-end repeat
+global ERR_AT_MAX_RESOLUTION
+set ERR_AT_MAX_RESOLUTION to 501
+
+global ERR_UNKNOWN_RESOLUTION
+set ERR_UNKNOWN_RESOLUTION to 502
+
+global ERR_INVALID_RESOLUTION_REQUESTED
+set ERR_INVALID_RESOLUTION_REQUESTED to 503
 
 to showDisplaysTab()
 	tell application "System Preferences"
@@ -73,7 +71,7 @@ on getScreenResolution()
 		end tell
 	end tell
 	-- Expected selected button not found, throw an error
-	error "Current resolution button to in range of 1-5" number ERR_UNKNOWN_RESOLUTION
+	error "Current resolution button to in range of 1-5" -- number ERR_UNKNOWN_RESOLUTION
 end getScreenResolution
 
 (*
@@ -82,7 +80,7 @@ end getScreenResolution
 *)
 on setScreenResolution to new_value
 	if new_value is less than 1 or new_value is greater than 5 then
-		error "Invalid resolution request: must be in range of 1-5" number ERR_INVALID_RESOLUTION_REQUESTED
+		error "Invalid resolution request: must be in range of 1-5" -- number (ERR_INVALID_RESOLUTION_REQUESTED)
 	end if
 	set rg to getRetinaResolutionRadioGroup()
 	tell application "System Events"
@@ -98,7 +96,7 @@ on decreaseScreenResoultion()
 	try
 		setScreenResolution to current_resolution - 1
 	on error ERR_INVALID_RESOLUTION_REQUESTED
-		error "You are at the minimum resolution already" number ERR_AT_MIN_RESOLUTION
+		error "You are at the minimum resolution already" -- number (ERR_AT_MIN_RESOLUTION)
 	end try
 end decreaseScreenResoultion
 
@@ -107,11 +105,10 @@ end decreaseScreenResoultion
 *)
 on increaseScreenResoultion()
 	set current_resolution to getScreenResolution()
-	--display dialog current_resolution
 	try
 		setScreenResolution to current_resolution + 1
-	on error ERR_INVALID_RESOLUTION_REQUESTED
-		error "You are at the maximum resolution already" number ERR_AT_MAX_RESOLUTION
+	on error (ERR_INVALID_RESOLUTION_REQUESTED)
+		error "You are at the maximum resolution already" --number (ERR_AT_MAX_RESOLUTION)
 	end try
 end increaseScreenResoultion
 
