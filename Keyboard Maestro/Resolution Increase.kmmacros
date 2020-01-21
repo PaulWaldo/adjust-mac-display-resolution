@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>CreationDate</key>
+		<real>580300532.51916397</real>
+		<key>CustomIconData</key>
+		<string>KMEP-WakeTrigger</string>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>DisplayKind</key>
+						<string>None</string>
+						<key>HonourFailureSettings</key>
+						<true/>
+						<key>IncludeStdErr</key>
+						<false/>
+						<key>MacroActionType</key>
+						<string>ExecuteAppleScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>tell script "My Display Utilities"
+ increaseScreenResoultion()
+end tell</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>TrimResultsNew</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+					</dict>
+				</array>
+				<key>CreationDate</key>
+				<real>598320399.09887505</real>
+				<key>CustomIconData</key>
+				<string>KMEP-Display</string>
+				<key>ModificationDate</key>
+				<real>598363542.05234802</real>
+				<key>Name</key>
+				<string>Resolution Increase</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>24</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>6912</integer>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>B044BE12-84FF-41A1-BD6B-0CA7029B665D</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>Desktop</string>
+		<key>ToggleMacroUID</key>
+		<string>723F7D58-567A-4662-AFFD-858D92A5550D</string>
+		<key>UID</key>
+		<string>A3C675F6-7CF2-4DA7-A2DE-8657E6C294C4</string>
+	</dict>
+</array>
+</plist>

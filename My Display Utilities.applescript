@@ -3,8 +3,17 @@
 *)
 
 (* Load error constants *)
-tell script "My Error Codes"
-end tell
+global ERR_AT_MIN_RESOLUTION
+set ERR_AT_MIN_RESOLUTION to 500
+
+global ERR_AT_MAX_RESOLUTION
+set ERR_AT_MAX_RESOLUTION to 501
+
+global ERR_UNKNOWN_RESOLUTION
+set ERR_UNKNOWN_RESOLUTION to 502
+
+global ERR_INVALID_RESOLUTION_REQUESTED
+set ERR_INVALID_RESOLUTION_REQUESTED to 503
 
 to showDisplaysTab()
 	tell application "System Preferences"
@@ -18,9 +27,9 @@ end showDisplaysTab
 
 (*
 	Helper function to get the buttons from System Preferences that control the reolution.
-	This assumes that the display of interest is labeled "Built-in Retina Display".  Other 
+	This assumes that the display of interest is labeled "Built-in Retina Display".  Other
 	display configurations may require tweaks.
-	
+
 	Returns: a Radio Group of 5 buttons, where button 1 is the lowest resolution (biggest
 	pixels) and button 5 is the densest resolution (smallest pixels).  This Radio Group
 	requires UI Scripting ("System Events") to access it.
@@ -45,7 +54,7 @@ end getRetinaResolutionRadioGroup
 
 (*
 	Get the current value of the display resolution.
-	
+
 	Returns: a number from 1 to 5 where 1 is the lowest resolution (biggest
 	pixels) and 5 is the densest resolution (smallest pixels).
 *)
@@ -62,7 +71,7 @@ on getScreenResolution()
 		end tell
 	end tell
 	-- Expected selected button not found, throw an error
-	error "Current resolution button to in range of 1-5" number ERR_UNKNOWN_RESOLUTION
+	error "Current resolution button to in range of 1-5" -- number ERR_UNKNOWN_RESOLUTION
 end getScreenResolution
 
 (*
@@ -71,7 +80,7 @@ end getScreenResolution
 *)
 on setScreenResolution to new_value
 	if new_value is less than 1 or new_value is greater than 5 then
-		error "Invalid resolution request: must be in range of 1-5" number ERR_INVALID_RESOLUTION_REQUESTED
+		error "Invalid resolution request: must be in range of 1-5" -- number (ERR_INVALID_RESOLUTION_REQUESTED)
 	end if
 	set rg to getRetinaResolutionRadioGroup()
 	tell application "System Events"
@@ -87,7 +96,7 @@ on decreaseScreenResoultion()
 	try
 		setScreenResolution to current_resolution - 1
 	on error ERR_INVALID_RESOLUTION_REQUESTED
-		error "You are at the minimum resolution already" number ERR_AT_MIN_RESOLUTION
+		error "You are at the minimum resolution already" -- number (ERR_AT_MIN_RESOLUTION)
 	end try
 end decreaseScreenResoultion
 
@@ -96,11 +105,10 @@ end decreaseScreenResoultion
 *)
 on increaseScreenResoultion()
 	set current_resolution to getScreenResolution()
-	--display dialog current_resolution
 	try
 		setScreenResolution to current_resolution + 1
-	on error ERR_INVALID_RESOLUTION_REQUESTED
-		error "You are at the maximum resolution already" number ERR_AT_MAX_RESOLUTION
+	on error (ERR_INVALID_RESOLUTION_REQUESTED)
+		error "You are at the maximum resolution already" --number (ERR_AT_MAX_RESOLUTION)
 	end try
 end increaseScreenResoultion
 
