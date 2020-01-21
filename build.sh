@@ -6,7 +6,6 @@ USER_SCRIPT_FOLDER=~/Library/Scripts
 
 # Compile and place the Script Library files
 mkdir -p "$USER_SCRIPT_LIBRARY_FOLDER"
-osacompile -o "$USER_SCRIPT_LIBRARY_FOLDER"/My\ Error\ Codes.scpt My\ Error\ Codes.applescript
 osacompile -o "$USER_SCRIPT_LIBRARY_FOLDER"/My\ Display\ Utilities.scpt My\ Display\ Utilities.applescript
 
 # Compile and place the Script files.  These will appear in the User's Script menu
